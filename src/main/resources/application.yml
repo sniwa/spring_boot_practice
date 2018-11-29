@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/introduction
+    username: root
+    password: password
+    driverClassName: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations:
+    - classpath*:mybatis/com/example/introduction/gen/mapper/*.xml
+  configuration:
+    cache-enabled: false
+    use-generated-keys: true
+    local-cache-scope: statement
