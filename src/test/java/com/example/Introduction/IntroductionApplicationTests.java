@@ -1,50 +1,29 @@
 package com.example.Introduction;
 
-import com.example.introduction.gen.entity.Task;
-import com.example.introduction.gen.entity.TaskExample;
-import com.example.introduction.gen.mapper.TaskMapper;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
+@AutoConfigureMockMvc
 public class IntroductionApplicationTests {
 
 	@Autowired
-	TaskMapper mapper;
+	MockMvc mockMvc;
 
-	/**
-	 * MyBatis+Springの連携テスト。
-	 * Generatorで生成したファイルでDBにアクセスできることを確認する。
-	 */
 	@Test
-	public void checkIntegrationWithMyBatis() {
-		Assert.assertNotNull(mapper);
-		Task task = new Task();
-		task.setText("text text");
-		task.setTitle("title");
-
-		int result = mapper.insertSelective(task);
-
-
-		Assert.assertEquals(1, result);
-
-		TaskExample example = new TaskExample();
-		example.createCriteria();
-		List<Task> foundTasks = mapper.selectByExampleWithBLOBs(example);
-		Assert.assertEquals(1, foundTasks.size());
-
-		Task found = foundTasks.get(0);
-		Assert.assertEquals("text text", found.getText());
-
+	public void indexPageTest() throws Exception {
+		mockMvc.perform(get("/"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("index"));
 	}
-
 }

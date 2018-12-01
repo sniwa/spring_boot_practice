@@ -1,4 +1,4 @@
-package com.example.introduction.controller;
+package com.example.introduction.api.task.controller;
 
 import com.example.introduction.gen.entity.Task;
 import com.example.introduction.gen.entity.TaskExample;
@@ -11,10 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class WelcomeController {
+@RequestMapping("/api")
+public class TaskApiController {
+    // TODO: needs to move it onto Service
+    private final TaskMapper taskMapper;
 
     @Autowired
-    TaskMapper taskMapper;
+    public TaskApiController(TaskMapper taskMapper) {
+        this.taskMapper = taskMapper;
+    }
 
     @RequestMapping(path = "/", method=RequestMethod.GET)
     public String index() {
