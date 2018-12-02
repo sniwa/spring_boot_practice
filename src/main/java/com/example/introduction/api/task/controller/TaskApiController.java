@@ -1,39 +1,80 @@
 package com.example.introduction.api.task.controller;
 
+import com.example.introduction.api.task.service.TaskApiService;
+import com.example.introduction.entity.APIResponse;
+import com.example.introduction.form.TaskForm;
 import com.example.introduction.gen.entity.Task;
-import com.example.introduction.gen.entity.TaskExample;
-import com.example.introduction.gen.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class TaskApiController {
-    // TODO: needs to move it onto Service
-    private final TaskMapper taskMapper;
+    private final TaskApiService taskApiService;
 
     @Autowired
-    public TaskApiController(TaskMapper taskMapper) {
-        this.taskMapper = taskMapper;
+    public TaskApiController(TaskApiService taskApiService) {
+        this.taskApiService = taskApiService;
     }
 
-    @RequestMapping(path = "/", method=RequestMethod.GET)
-    public String index() {
-        return "Welcome To My World 35";
-    }
-
-    @RequestMapping(path= "/list")
+    @RequestMapping(path= "/task/list")
     public List<Task> list() {
+        return taskApiService.listTasks();
+    }
+
+    @RequestMapping(path = "/task/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Task insertTask(@Validated @RequestBody TaskForm form) {
         Task task = new Task();
-        task.setTitle("Hello");
-        task.setText("Dreaming Mermaid");
+        task.setTitle(form.getTitle());
+        task.setText(form.getText());
 
-        int result = taskMapper.insertSelective(task);
+        int id = taskApiService.insertTask(task);
+        return taskApiService.getTask(id);
+    }
 
-        return taskMapper.selectByExampleWithBLOBs(new TaskExample());
+    @RequestMapping(path = "/task/{id}/delete", method = RequestMethod.POST)
+    public APIResponse deleteTask(@PathVariable("id") int id) {
+        APIResponse response = new APIResponse();
+
+        boolean result = taskApiService.deleteTask(id);
+        if (!result) {
+            response.setStatusCode(404);
+            response.setMessage("not found");
+
+            return response;
+        }
+
+        response.setMessage("success");
+        response.setStatusCode(200);
+
+        return response;
+    }
+
+    @RequestMapping(path = "/task/{id}/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public APIResponse updateTask(@PathVariable("id") int id, @Validated @RequestBody TaskForm form) {
+        APIResponse response = new APIResponse();
+
+        Task task = new Task();
+        task.setId(id);
+        task.setText(form.getText());
+        task.setTitle(form.getTitle());
+
+        Task result = taskApiService.updateTask(task);
+
+        if (result == null) {
+            response.setStatusCode(404);
+            response.setMessage("not found");
+
+            return response;
+        }
+
+        response.setMessage("success");
+        response.setStatusCode(200);
+
+        return response;
     }
 }

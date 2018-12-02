@@ -1,64 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>todo.ing</title>
+    <title>Dashboard</title>
     <link rel="shortcut icon" th:href="@{/img/favicon.png}">
     <!-- bulma -->
-    <th:block th:replace="~{common/common :: bulma}"></th:block>
+    <th:block th:replace="common/common :: bulma"></th:block>
     <!-- Vue -->
-    <script th:replace="~{common/common :: vue}" />
+    <script th:replace="common/common :: vue" />
 </head>
 <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" th:href="@{/}">
-                <img th:src="@{/img/logo.png}" alt="task.end" width="56" height="56">
-            </a>
-
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item">
-                    Home
-                </a>
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-primary">
-                            <strong>Sign up</strong>
-                        </a>
-                        <a class="button is-light">
-                            Log in
-                        </a>
-                    </div>
+    <div id="vue-app">
+        <th:block th:replace="common/common :: navbar"></th:block>
+        <section class="section">
+            <div class="columns">
+                <div class="column is-one-fifth">
+                    <th:block th:replace="common/common :: sidemenu"></th:block>
+                </div>
+                <div class="column">
+                    <h1 class="title">ダッシュボード</h1>
                 </div>
             </div>
-        </div>
-    </nav>
-    <section id="vue-app"  class="section">
-        <div class="container">
-            <h1 class="title">タスクリスト</h1>
-            <h2>Tasks</h2>
-            <ul>
-                <memo v-for="task of tasks"
-                      :key="task.id"
-                      :title="task.title"
-                      :text="task.text"
-                      :created="task.created"
-                >
-                    Item detected
-                </memo>
-            </ul>
-        </div>
-    </section>
+        </section>
+    </div>
 </body>
 
 <script type="module" th:src="@{/js/index.js}"></script>
