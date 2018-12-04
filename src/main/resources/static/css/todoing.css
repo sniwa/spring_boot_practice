@@ -6,6 +6,12 @@
     margin-bottom: 10px;
 }
 
+.task-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .task-list {
-    float: left;
+    align-self: flex-start;
 }

@@ -33,7 +33,7 @@ public class TaskApiService {
     }
 
     public Task updateTask(Task task) {
-        int result = taskMapper.updateByPrimaryKeyWithBLOBs(task);
+        int result = taskMapper.updateByPrimaryKeySelective(task);
         if (result == 0) {
             return null;
         }

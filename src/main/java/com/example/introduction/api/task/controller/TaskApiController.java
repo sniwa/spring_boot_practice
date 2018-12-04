@@ -58,8 +58,8 @@ public class TaskApiController {
     public APIResponse updateTask(@PathVariable("id") int id, @Validated @RequestBody TaskForm form) {
         APIResponse response = new APIResponse();
 
-        Task task = new Task();
-        task.setId(id);
+        Task task = taskApiService.getTask(id);
+
         task.setText(form.getText());
         task.setTitle(form.getTitle());
 

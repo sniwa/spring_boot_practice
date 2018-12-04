@@ -36,9 +36,9 @@ const memoComponent = {
                 </div>
             </div>
             <footer class="card-footer">
-                <a href="#" class="card-footer-item" v-if="!edit" v-on:click="requestEdit">Edit</a>
-                <a href="#" class="card-footer-item" v-if="edit" v-on:click="requestSave(id)">Save</a>
-                <a href="#" class="card-footer-item" v-on:click="$emit('delete-memo-request', id)">Delete</a>
+                <a class="card-footer-item" v-if="!edit" v-on:click="requestEdit">Edit</a>
+                <a class="card-footer-item" v-if="edit" v-on:click="requestSave(id)">Save</a>
+                <a class="card-footer-item" v-on:click="$emit('delete-memo-request', id)">Delete</a>
             </footer>
         </div>`,
     methods: {
