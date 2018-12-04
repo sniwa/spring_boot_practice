@@ -13,7 +13,7 @@ const memoComponent = {
         }
     },
     template:
-        `<div class="card">
+        `<div class="card task-list">
             <header class="card-header">
                 <p class="card-header-title">
                     {{ title }}

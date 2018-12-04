@@ -20,7 +20,7 @@
             <div class="column">
                 <h1 class="title">タスクリスト</h1>
                 <a class="button is-primary" v-on:click="requestModal">Create New Task</a>
-                <div class="tile">
+                <div>
                     <modal v-bind:active="showModal"
                            v-on:modal-submit="submitTask"
                            v-on:modal-close="showModal = false;"></modal>

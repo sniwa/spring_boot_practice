@@ -1,5 +1,11 @@
 /* card element */
 .card {
     width: 300px;
-    margin: 10px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.task-list {
+    float: left;
 }
