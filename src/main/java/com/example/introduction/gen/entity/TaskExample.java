@@ -255,6 +255,186 @@ public class TaskExample {
             return (Criteria) this;
         }
 
+        public Criteria andCompletedIsNull() {
+            addCriterion("completed is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedIsNotNull() {
+            addCriterion("completed is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedEqualTo(Integer value) {
+            addCriterion("completed =", value, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedNotEqualTo(Integer value) {
+            addCriterion("completed <>", value, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedGreaterThan(Integer value) {
+            addCriterion("completed >", value, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedGreaterThanOrEqualTo(Integer value) {
+            addCriterion("completed >=", value, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedLessThan(Integer value) {
+            addCriterion("completed <", value, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedLessThanOrEqualTo(Integer value) {
+            addCriterion("completed <=", value, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedIn(List<Integer> values) {
+            addCriterion("completed in", values, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedNotIn(List<Integer> values) {
+            addCriterion("completed not in", values, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedBetween(Integer value1, Integer value2) {
+            addCriterion("completed between", value1, value2, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedNotBetween(Integer value1, Integer value2) {
+            addCriterion("completed not between", value1, value2, "completed");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateIsNull() {
+            addCriterion("completed_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateIsNotNull() {
+            addCriterion("completed_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateEqualTo(Date value) {
+            addCriterion("completed_date =", value, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateNotEqualTo(Date value) {
+            addCriterion("completed_date <>", value, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateGreaterThan(Date value) {
+            addCriterion("completed_date >", value, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("completed_date >=", value, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateLessThan(Date value) {
+            addCriterion("completed_date <", value, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateLessThanOrEqualTo(Date value) {
+            addCriterion("completed_date <=", value, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateIn(List<Date> values) {
+            addCriterion("completed_date in", values, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateNotIn(List<Date> values) {
+            addCriterion("completed_date not in", values, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateBetween(Date value1, Date value2) {
+            addCriterion("completed_date between", value1, value2, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompletedDateNotBetween(Date value1, Date value2) {
+            addCriterion("completed_date not between", value1, value2, "completedDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityIsNull() {
+            addCriterion("priority is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityIsNotNull() {
+            addCriterion("priority is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityEqualTo(Integer value) {
+            addCriterion("priority =", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotEqualTo(Integer value) {
+            addCriterion("priority <>", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityGreaterThan(Integer value) {
+            addCriterion("priority >", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityGreaterThanOrEqualTo(Integer value) {
+            addCriterion("priority >=", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityLessThan(Integer value) {
+            addCriterion("priority <", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityLessThanOrEqualTo(Integer value) {
+            addCriterion("priority <=", value, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityIn(List<Integer> values) {
+            addCriterion("priority in", values, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotIn(List<Integer> values) {
+            addCriterion("priority not in", values, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityBetween(Integer value1, Integer value2) {
+            addCriterion("priority between", value1, value2, "priority");
+            return (Criteria) this;
+        }
+
+        public Criteria andPriorityNotBetween(Integer value1, Integer value2) {
+            addCriterion("priority not between", value1, value2, "priority");
+            return (Criteria) this;
+        }
+
         public Criteria andDeletedIsNull() {
             addCriterion("deleted is null");
             return (Criteria) this;

@@ -7,6 +7,8 @@
     <th:block th:replace="common/common :: bulma"></th:block>
     <!-- Vue -->
     <script th:replace="common/common :: vue" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
 <body>
     <div id="vue-app">
@@ -18,6 +20,7 @@
                 </div>
                 <div class="column">
                     <h1 class="title">ダッシュボード</h1>
+                    <doughnut :canvas_id="'doughnut'"></doughnut>
                 </div>
             </div>
         </section>
