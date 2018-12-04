@@ -23,15 +23,25 @@
                 <modal v-bind:active="showModal"
                        v-on:modal-submit="submitTask"
                        v-on:modal-close="showModal = false;"></modal>
+                <delete-modal v-bind:active="showDeleteModal"
+                              v-bind:target="deleteTarget"
+                             v-on:modal-submit="deleteMemo"
+                             v-on:modal-close="showDeleteModal = false;"></delete-modal>
+                <done-modal v-bind:active="showDoneModal"
+                              v-bind:target="doneTarget"
+                              v-on:modal-submit="doneMemo"
+                              v-on:modal-close="showDoneModal = false;"></done-modal>
                 <div class="task-container">
                     <memo v-for="task of tasks"
                           :key="task.id"
                           :id="task.id"
                           v-bind:title="task.title"
                           v-bind:text="task.text"
+                          v-bind:done="task.completed"
                           :created="task.created"
-                          v-on:delete-memo-request="deleteMemo"
+                          v-on:delete-memo-request="deleteMemoRequest"
                           v-on:save-memo-request="saveMemo"
+                          v-on:done-memo-request="doneMemoRequest"
                     ></memo>
                 </div>
             </div>

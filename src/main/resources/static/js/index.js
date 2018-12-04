@@ -2,13 +2,15 @@ var data = {
     welcome_message: "Test"
 };
 
-import doughnutComponent from './components/doughnutChartComponent.js';
+import usageChartComponent from './components/usageChartComponent.js';
+import timelineChartComponent from './components/timelineChartComponent.js';
 
 new Vue({
     el: '#vue-app',
     data: data,
     components: {
-     'doughnut': doughnutComponent
+     'usage': usageChartComponent,
+     'timeline' : timelineChartComponent
     },
     mounted: function() {
 

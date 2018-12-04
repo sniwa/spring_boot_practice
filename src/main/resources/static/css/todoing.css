@@ -15,3 +15,17 @@
 .task-list {
     align-self: flex-start;
 }
+
+.task-completed {
+    background: #00b89c;
+}
+
+.dashboard {
+    display:  flex;
+    flex-direction: row;
+}
+
+.dashboard-item {
+    width: auto;
+    align-self: flex-start;
+}

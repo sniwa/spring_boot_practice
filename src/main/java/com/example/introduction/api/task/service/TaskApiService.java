@@ -6,6 +6,7 @@ import com.example.introduction.gen.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,5 +43,23 @@ public class TaskApiService {
 
     public List<Task> listTasks() {
         return taskMapper.selectByExampleWithBLOBs(new TaskExample());
+    }
+
+    public boolean doneTask(int id) {
+        Task targetTask = getTask(id);
+
+        if (targetTask == null) {
+            return false;
+        }
+
+        targetTask.setCompleted(1);
+        targetTask.setCompletedDate(new Date());
+
+        Task result = updateTask(targetTask);
+        if (result == null) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -1,9 +1,17 @@
-const doughnutChartComponent = {
+const usageChartComponent = {
     props: ['canvas_id'],
     template: `
-        <div style="width: 300px; height:300px">
-            <canvas v-bind:id="canvas_id">
-            </canvas>
+        <div class="card">
+            <div class="card-header">
+                <p class="card-header-title">Total Counts</p>
+            </div>
+            <div class="card-content" style="width: 300px; height:300px">
+                <canvas v-bind:id="canvas_id">
+                </canvas>
+            </div>
+            <footer class="card-footer">
+                <a class="card-footer-item">Change</a>
+            </footer>
         </div>
     `,
     mounted: function () {
@@ -11,7 +19,7 @@ const doughnutChartComponent = {
         var myPieChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ["Red", "Blue", "Yellow"],
+                labels: ["Completed", "Progressing", "Deleted"],
                 datasets: [{
                     data: [20, 50, 30],
                     backgroundColor: [
@@ -22,10 +30,13 @@ const doughnutChartComponent = {
                 }]
             },
             options: {
+                legend: {
+                    display: false,
+                },
                 responsive: true
             }
         });
     }
 };
 
-export default doughnutChartComponent;
+export default usageChartComponent;

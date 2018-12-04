@@ -5,7 +5,7 @@ const memoComponent = {
             editableText: this.text
         }
     },
-    props: ['id', 'title', 'text', 'created'],
+    props: ['id', 'title', 'text', 'created', 'done'],
     computed: {
         format_created: function() {
             let fmtTime = moment(this.created);
@@ -13,15 +13,15 @@ const memoComponent = {
         }
     },
     template:
-        `<div class="card task-list">
+        `<div class="card task-list" v-bind:class="done != 0 ? 'task-completed' : ''">
             <header class="card-header">
                 <p class="card-header-title">
                     {{ title }}
                 </p>
-                <a href="#" class="card-header-icon" aria-label="more options">
+                <a class="card-header-icon" aria-label="delete this task" v-on:click="$emit('delete-memo-request', id)">
                     <span class="icon">
-                    <i class="fas fa-angle-down" aria-hidden="true"></i>
-                  </span>
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </span>
                 </a>
             </header>
             <div class="card-content">
@@ -36,9 +36,15 @@ const memoComponent = {
                 </div>
             </div>
             <footer class="card-footer">
-                <a class="card-footer-item" v-if="!edit" v-on:click="requestEdit">Edit</a>
-                <a class="card-footer-item" v-if="edit" v-on:click="requestSave(id)">Save</a>
-                <a class="card-footer-item" v-on:click="$emit('delete-memo-request', id)">Delete</a>
+                <template v-if="!edit">
+                    <a class="card-footer-item" v-on:click="requestDone(id)">Done</a>
+                    <a class="card-footer-item" v-on:click="requestEdit">Edit</a>
+                </template>
+                <template v-if="edit">
+                    <a class="card-footer-item" v-on:click="requestSave(id)">Save</a>
+                    <a class="card-footer-item" v-on:click="requestCancel">Cancel</a>
+                </template>
+                
             </footer>
         </div>`,
     methods: {
@@ -48,6 +54,13 @@ const memoComponent = {
         requestSave: function(id) {
             this.$emit('save-memo-request', id, {title: this.title, text: this.editableText});
             this.edit = false;
+        },
+        requestCancel: function() {
+            this.edit = false;
+            this.editableText = this.text;
+        },
+        requestDone: function(id) {
+            this.$emit('done-memo-request', id);
         }
     }
 };

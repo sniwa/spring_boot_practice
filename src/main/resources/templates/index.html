@@ -20,7 +20,10 @@
                 </div>
                 <div class="column">
                     <h1 class="title">ダッシュボード</h1>
-                    <doughnut :canvas_id="'doughnut'"></doughnut>
+                    <div class="dashboard">
+                        <usage :canvas_id="'usage'" class="dashboard-item"></usage>
+                        <timeline :canvas_id="'timeline'" class="dashboard-item"></timeline>
+                    </div>
                 </div>
             </div>
         </section>

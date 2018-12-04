@@ -54,6 +54,24 @@ public class TaskApiController {
         return response;
     }
 
+    @RequestMapping(path = "/task/{id}/done", method = RequestMethod.POST)
+    public APIResponse doneTask(@PathVariable("id") int id) {
+        APIResponse response = new APIResponse();
+
+        boolean result = taskApiService.doneTask(id);
+        if (!result) {
+            response.setStatusCode(404);
+            response.setMessage("not found");
+
+            return response;
+        }
+
+        response.setMessage("success");
+        response.setStatusCode(200);
+
+        return response;
+    }
+
     @RequestMapping(path = "/task/{id}/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public APIResponse updateTask(@PathVariable("id") int id, @Validated @RequestBody TaskForm form) {
         APIResponse response = new APIResponse();
