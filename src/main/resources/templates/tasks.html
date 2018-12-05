@@ -9,7 +9,7 @@
     <script th:replace="common/common :: vue" />
 </head>
 <body>
-<div id="vue-app">
+<div id="vue-app" th:data-model="*{dataContext}">
     <th:block th:replace="common/common :: navbar"></th:block>
     <section class="section">
         <div class="columns">
@@ -38,6 +38,7 @@
                           v-bind:title="task.title"
                           v-bind:text="task.text"
                           v-bind:done="task.completed"
+                          :priority="task.priority"
                           :created="task.created"
                           v-on:delete-memo-request="deleteMemoRequest"
                           v-on:save-memo-request="saveMemo"

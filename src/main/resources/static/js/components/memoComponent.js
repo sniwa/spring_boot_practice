@@ -5,11 +5,35 @@ const memoComponent = {
             editableText: this.text
         }
     },
-    props: ['id', 'title', 'text', 'created', 'done'],
+    props: ['id', 'title', 'text', 'created', 'done', 'priority'],
     computed: {
         format_created: function() {
             let fmtTime = moment(this.created);
             return fmtTime.format("YYYY/MM/DD HH:mm:ss");
+        },
+        priority_text: function() {
+            switch (this.priority) {
+                case 0:
+                    return "default";
+                case 1:
+                    return "low";
+                case 2:
+                    return "middle";
+                case 3:
+                    return "high";
+            }
+        },
+        priority_style: function() {
+            switch (this.priority) {
+                case 0:
+                    return "";
+                case 1:
+                    return "is-info";
+                case 2:
+                    return "is-warning";
+                case 3:
+                    return "is-danger";
+            }
         }
     },
     template:
@@ -18,7 +42,10 @@ const memoComponent = {
                 <p class="card-header-title">
                     {{ title }}
                 </p>
-                <a class="card-header-icon" aria-label="delete this task" v-on:click="$emit('delete-memo-request', id)">
+                <a class="card-header-icon">
+                    <a class="button is-small is-rounded" v-bind:class="priority_style">{{ priority_text }}</a>               
+                </a>
+                <a v-if="!done" class="card-header-icon" aria-label="delete this task" v-on:click="$emit('delete-memo-request', id)">
                     <span class="icon">
                         <i class="fas fa-times" aria-hidden="true"></i>
                     </span>
@@ -32,10 +59,10 @@ const memoComponent = {
                     <textarea class="textarea" v-if="edit" v-model="editableText">
                     </textarea>
                     <br>
-                    <time datetime="2016-1-1" class="has-text-weight-light is-size-7 has-text-grey">{{ format_created }}</time>
+                    <time v-bind:datetime="format_created" class="has-text-weight-light is-size-7 has-text-grey">{{ format_created }}</time>
                 </div>
             </div>
-            <footer class="card-footer">
+            <footer class="card-footer" v-if="!done">
                 <template v-if="!edit">
                     <a class="card-footer-item" v-on:click="requestDone(id)">Done</a>
                     <a class="card-footer-item" v-on:click="requestEdit">Edit</a>

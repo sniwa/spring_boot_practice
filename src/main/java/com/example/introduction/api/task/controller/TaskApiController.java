@@ -6,6 +6,7 @@ import com.example.introduction.form.TaskForm;
 import com.example.introduction.gen.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,23 @@ public class TaskApiController {
         Task task = new Task();
         task.setTitle(form.getTitle());
         task.setText(form.getText());
+
+        if (!StringUtils.isEmpty(form.getPriority())) {
+            String prior = form.getPriority();
+            int priority = -1;
+            switch (prior) {
+                case "low":
+                    priority = 1;
+                    break;
+                case "middle":
+                    priority = 2;
+                    break;
+                case "high":
+                    priority = 3;
+                    break;
+            }
+            task.setPriority(priority);
+        }
 
         int id = taskApiService.insertTask(task);
         return taskApiService.getTask(id);

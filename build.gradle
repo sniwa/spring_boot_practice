@@ -20,12 +20,6 @@ configurations {
 	mybatisGenerator
 }
 
-dependencies {
-	// Mybatis Generator 関連
-	mybatisGenerator group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.3.6'
-	mybatisGenerator group: 'mysql', name: 'mysql-connector-java', version: '5.1.46'
-}
-
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
@@ -48,7 +42,12 @@ sourceSets {
 }
 
 dependencies {
-	// implementation('org.springframework.boot:spring-boot-starter-security')
+    // Mybatis Generator 関連
+    mybatisGenerator group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.3.6'
+    mybatisGenerator group: 'mysql', name: 'mysql-connector-java', version: '5.1.46'
+
+    // implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('com.google.code.gson:gson:2.8.5')
 	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')

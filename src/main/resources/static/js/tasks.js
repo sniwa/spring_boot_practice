@@ -1,3 +1,8 @@
+function getContext() {
+    let dataModel = document.getElementById("vue-app").getAttribute("data-model");
+    return JSON.parse(dataModel);
+}
+
 var data = {
     welcome_message: "Test",
     tasks: [],
@@ -26,8 +31,12 @@ new Vue({
         "done-modal": doneModalComponent
     },
     mounted: function() {
+        let context = getContext();
+        let fetchApiUrl = context.taskFetchMode === "completed" ?
+            "/api/task/list/completed" :
+            "/api/task/list";
         // API一覧を取得して画面に表示する
-        fetch("/api/task/list").then(async response =>  {
+        fetch(fetchApiUrl).then(async response =>  {
             let json = await response.json();
             for (let task of json) {
                 data.tasks.push(task);
