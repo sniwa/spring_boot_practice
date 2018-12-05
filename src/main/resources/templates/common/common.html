@@ -57,7 +57,13 @@
             </p>
             <ul class="menu-list">
                 <li><a href="/" th:class="${currentDisplayIndex == 0 ? 'is-active' : ''}">Dashboard</a></li>
-                <li><a href="/tasks" th:class="${currentDisplayIndex == 1 ? 'is-active' : ''}">Tasks</a></li>
+            </ul>
+            <p class="menu-label">
+                Tasks
+            </p>
+            <ul class="menu-list">
+                <li><a href="/tasks" th:class="${currentDisplayIndex == 1 ? 'is-active' : ''}">Progress</a></li>
+                <li><a href="/tasks?kind=completed" th:class="${currentDisplayIndex == 2 ? 'is-active' : ''}">Completed</a></li>
             </ul>
         </aside>
     </th:block>

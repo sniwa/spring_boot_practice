@@ -29,7 +29,10 @@ public class TaskApiService {
     }
 
     public boolean deleteTask(int id) {
-        int result = taskMapper.deleteByPrimaryKey(id);
+        Task task = new Task();
+        task.setId(id);
+        task.setDeleted(1);
+        int result = taskMapper.updateByPrimaryKeySelective(task);
         return result > 0;
     }
 
@@ -42,7 +45,19 @@ public class TaskApiService {
     }
 
     public List<Task> listTasks() {
-        return taskMapper.selectByExampleWithBLOBs(new TaskExample());
+        TaskExample example = new TaskExample();
+        example.createCriteria()
+                .andCompletedEqualTo(0)
+                .andDeletedEqualTo(0);
+        return taskMapper.selectByExampleWithBLOBs(example);
+    }
+
+    public List<Task> listCompletedTasks() {
+        TaskExample example = new TaskExample();
+        example.createCriteria()
+                .andCompletedEqualTo(1)
+                .andDeletedEqualTo(0);
+        return taskMapper.selectByExampleWithBLOBs(example);
     }
 
     public boolean doneTask(int id) {

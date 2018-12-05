@@ -26,6 +26,13 @@ public class TaskApiController {
         return taskApiService.listTasks();
     }
 
+    @RequestMapping(path= "/task/list/completed")
+    public List<Task> completedList() {
+        return taskApiService.listCompletedTasks();
+    }
+
+
+
     @RequestMapping(path = "/task/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Task insertTask(@Validated @RequestBody TaskForm form) {
         Task task = new Task();
