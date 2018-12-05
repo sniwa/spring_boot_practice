@@ -73,6 +73,9 @@ const modalComponent = {
     methods: {
         submitTask: function () {
             this.$emit('modal-submit', {title: this.title, text: this.text, priority: this.priority});
+            this.title = "";
+            this.text = "";
+            this.priority = "middle";
         },
         closeModal: function () {
             this.$emit('modal-close');

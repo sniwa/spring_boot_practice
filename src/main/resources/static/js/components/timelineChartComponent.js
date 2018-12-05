@@ -14,13 +14,24 @@ const timelineChartComponent = {
             </footer>
         </div>
     `,
-    mounted: function () {
+    mounted: async function () {
         var ctx = document.getElementById(this.canvas_id);
         var labels = [];
-        for (var i = 0; i < 7; i++) {
-            labels.push(moment().subtract(i, 'days').format('YYYY/MM/DD'));
+        var completed = [];
+        var created = [];
+
+        let response = await fetch("/api/stats/week");
+        let json = await response.json();
+        // make labels
+        for (var date of json.response.dates) {
+            labels.push(moment(date.date).format("YYYY/MM/DD"));
+            completed.push(date.completed);
+            created.push(date.created);
         }
         labels = labels.reverse();
+        completed = completed.reverse();
+        created = created.reverse();
+
         var myTimeline = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -29,18 +40,14 @@ const timelineChartComponent = {
                         label: 'Completed',
                         backgroundColor: 'rgba(255, 99, 132, 1)',
                         borderColor: 'rgba(255, 99, 132, 1)',
-                        data: [
-                            1, 3, 5, 4, 3, 2, 1
-                        ],
+                        data: completed,
                         fill: false,
-                    }, {
-                        label: 'Progressing',
+                    },{
+                        label: 'Created',
+                        backgroundColor:  'rgba(54, 162, 235, 1)',
+                        borderColor:      'rgba(54, 162, 235, 1)',
+                        data: created,
                         fill: false,
-                        backgroundColor: 'rgba(54, 162, 235, 1)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        data: [
-                            2, 8, 7, 1, 0, 3, 2
-                        ],
                     }]
                 },
                 options: {

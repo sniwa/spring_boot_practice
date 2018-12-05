@@ -7,6 +7,7 @@ public class APIResponse implements Serializable  {
 
     private int statusCode;
 
+    private Serializable response;
 
     public int getStatusCode() {
         return statusCode;
@@ -22,5 +23,13 @@ public class APIResponse implements Serializable  {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Serializable getResponse() {
+        return response;
+    }
+
+    public void setResponse(Serializable response) {
+        this.response = response;
     }
 }

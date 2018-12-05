@@ -14,14 +14,20 @@ const usageChartComponent = {
             </footer>
         </div>
     `,
-    mounted: function () {
+    mounted: async function () {
         var ctx = document.getElementById(this.canvas_id);
-        var myPieChart = new Chart(ctx, {
+        var response = await fetch("/api/stats/total");
+        if (!response.ok) {
+            return;
+        }
+
+        let json = await response.json();
+        let myPieChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
                 labels: ["Completed", "Progressing", "Deleted"],
                 datasets: [{
-                    data: [20, 50, 30],
+                    data: [json.response.completed, json.response.progress, json.response.deleted],
                     backgroundColor: [
                         'rgba(255, 99, 132, 1)',
                         'rgba(54, 162, 235, 1)',

@@ -2,6 +2,9 @@ package com.example.introduction.api.task.controller;
 
 import com.example.introduction.api.task.service.TaskApiService;
 import com.example.introduction.entity.APIResponse;
+import com.example.introduction.entity.TaskPerDayEntity;
+import com.example.introduction.entity.TaskPerWeekEntity;
+import com.example.introduction.entity.TaskStatsEntity;
 import com.example.introduction.form.TaskForm;
 import com.example.introduction.gen.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -31,8 +35,6 @@ public class TaskApiController {
     public List<Task> completedList() {
         return taskApiService.listCompletedTasks();
     }
-
-
 
     @RequestMapping(path = "/task/new", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Task insertTask(@Validated @RequestBody TaskForm form) {
@@ -117,6 +119,33 @@ public class TaskApiController {
 
         response.setMessage("success");
         response.setStatusCode(200);
+
+        return response;
+    }
+
+    @RequestMapping(path = "/stats/total")
+    public APIResponse getTotalCounts() {
+        APIResponse response = new APIResponse();
+
+        TaskStatsEntity stats = taskApiService.fetchCounts();
+        response.setResponse(stats);
+        response.setStatusCode(200);
+        response.setMessage("completed");
+
+        return response;
+    }
+
+    @RequestMapping(path = "/stats/week")
+    public APIResponse getWeekStats() {
+        APIResponse response = new APIResponse();
+
+        List<TaskPerDayEntity> dates = taskApiService.fetchWeekProgress(new Date());
+        TaskPerWeekEntity entity = new TaskPerWeekEntity();
+        entity.setDates(dates);
+
+        response.setStatusCode(200);
+        response.setMessage("completed");
+        response.setResponse(entity);
 
         return response;
     }
