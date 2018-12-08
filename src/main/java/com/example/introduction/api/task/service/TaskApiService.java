@@ -112,6 +112,7 @@ public class TaskApiService {
     public List<TaskPerDayEntity> fetchWeekProgress(Date baseDate) {
         List<TaskPerDayEntity> taskPerDayEntities = new ArrayList<>();
         LocalDateTime time = LocalDateTime.ofInstant(baseDate.toInstant(), ZoneId.systemDefault());
+
         for (int i = 0; i < 7; i++) {
             LocalDateTime startDateTime = time.minusDays(i).truncatedTo(ChronoUnit.DAYS);
             Date startDate = Date.from(startDateTime.toInstant(OffsetDateTime.now().getOffset()));
@@ -131,6 +132,7 @@ public class TaskApiService {
             dayEntity.setCreated((int)createdCount);
             taskPerDayEntities.add(dayEntity);
         }
+
         return taskPerDayEntities;
     }
 }

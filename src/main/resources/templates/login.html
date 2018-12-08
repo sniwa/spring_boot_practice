@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}">
+    <!-- bulma -->
+    <th:block th:replace="common/common :: bulma"></th:block>
+    <!-- Vue -->
+    <script th:replace="common/common :: vue" />
+</head>
+<body>
+<div id="vue-app">
+    <th:block th:replace="common/common :: navbar"></th:block>
+    <section class="section">
+        <form th:action="@{/login}" th:method="POST" class="container" th:object="${login}">
+            <h1 class="title">Login</h1>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input th:field="*{email}" class="input" th:classappend="${#fields.hasErrors() ? 'is-danger' : ''}" type="text">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                </div>
+                <p th:if="${#fields.hasErrors()}" class="help is-danger">This email or password is invalid</p>
+            </div>
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+                <input th:field="*{password}" class="input" th:classappend="${#fields.hasErrors() ? 'is-danger' : ''}" type="password">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                </span>
+                <span th:if="${#fields.hasErrors()}" class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </span>
+            </div>
+            <p th:if="${#fields.hasErrors()}" class="help is-danger">This email or password is invalid</p>
+            <br>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-primary">Login</button>
+                </div>
+            </div>
+        </form>
+    </section>
+</div>
+</body>
+</html>

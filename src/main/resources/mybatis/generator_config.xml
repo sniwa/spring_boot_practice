@@ -19,5 +19,10 @@
         <table schema="introduction" tableName="task" modelType="flat">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
+        <table schema="introduction" tableName="user" modelType="flat">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table schema="introduction" tableName="task_permissions" modelType="flat">
+        </table>
     </context>
 </generatorConfiguration>
