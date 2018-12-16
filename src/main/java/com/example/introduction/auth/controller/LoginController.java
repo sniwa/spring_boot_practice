@@ -2,6 +2,7 @@ package com.example.introduction.auth.controller;
 
 import com.example.introduction.auth.component.LoginComponent;
 import com.example.introduction.form.LoginForm;
+import com.example.introduction.gen.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -34,13 +35,15 @@ public class LoginController {
             return "login";
         }
 
-        if (!loginComponent.auth(loginForm)) {
+        User user = loginComponent.auth(loginForm);
+        if (user == null) {
             ObjectError error = new FieldError("authorization", "failed", "");
             result.addError(error);
             return "login";
         }
 
         request.getSession().setAttribute("LOGIN", true);
+        request.getSession().setAttribute("LOGIN_USER", user);
 
         return "redirect:";
     }

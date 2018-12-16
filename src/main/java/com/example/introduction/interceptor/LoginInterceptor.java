@@ -13,9 +13,10 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestUri = request.getRequestURI();
-        if (requestUri.equals(request.getContextPath() + "/login")) {
+        if (requestUri.equals(request.getContextPath() + "/sign") || requestUri.equals(request.getContextPath() + "/login")) {
             return true;
         }
+
         String[] pathElements = requestUri.split("/");
         if (pathElements.length == 0) {
             pathElements = new String[] { request.getServletPath() };
@@ -24,7 +25,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         String lastPath = pathElements[pathElements.length - 1];
 
         if (lastPath.matches(".*\\.(js|css|png)")) {
-            System.out.println("bypass: " + lastPath);
             return true;
         }
 
@@ -35,7 +35,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }
 
-        System.out.println("need login: " + lastPath);
         response.sendRedirect("/login");
         return false;
     }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="shortcut icon" th:href="@{/img/favicon.png}">
     <!-- bulma -->
     <th:block th:replace="common/common :: bulma"></th:block>
@@ -12,8 +12,8 @@
 <div id="vue-app">
     <th:block th:replace="common/common :: navbar"></th:block>
     <section class="section">
-        <form th:action="@{/login}" th:method="POST" class="container" th:object="${login}">
-            <h1 class="title">Login</h1>
+        <form th:action="@{/sign}" th:method="POST" class="container" th:object="${signUp}">
+            <h1 class="title">Sign Up</h1>
             <p th:if="${#fields.hasAnyErrors()}" class="help is-danger">Unknown error occurred. please contact to administrator</p>
             <div class="field">
                 <label class="label">Email</label>
@@ -39,10 +39,20 @@
                 </span>
             </div>
             <p th:if="${#fields.hasErrors()}" class="help is-danger">This email or password is invalid</p>
+            <label class="label">Name</label>
+            <div class="control has-icons-left has-icons-right">
+                <input th:field="*{name}" class="input" th:classappend="${#fields.hasErrors() ? 'is-danger' : ''}" type="text">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+                <span th:if="${#fields.hasErrors()}" class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </span>
+            </div>
             <br>
             <div class="field is-grouped">
                 <div class="control">
-                    <button class="button is-primary">Login</button>
+                    <button class="button is-primary">Sign Up</button>
                 </div>
             </div>
         </form>
