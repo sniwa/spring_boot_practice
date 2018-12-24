@@ -1,0 +1,26 @@
+{
+  "name": "Introduction",
+  "version": "1.0.0",
+  "main": "src/main/resources/static/js/index.js",
+  "author": "Shun Iwai",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "ts-loader": "^5.3.2",
+    "vue": "^2.5.21",
+    "vue-loader": "^15.4.2",
+    "vue-property-decorator": "^7.2.0",
+    "vue-template-compiler": "^2.5.21",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --watch"
+  },
+  "dependencies": {
+    "typescript": "^3.2.2"
+  }
+}
